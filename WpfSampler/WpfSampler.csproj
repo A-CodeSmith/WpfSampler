@@ -115,13 +115,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\Resources\img\WPF-logo.png">
-      <Link>Resources\WPF-logo.png</Link>
-    </Resource>
+    <Resource Include="Resources\WPF-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Resources\sfx\ding.wav">
-      <Link>Resources\ding.wav</Link>
+    <Content Include="Resources\ding.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
