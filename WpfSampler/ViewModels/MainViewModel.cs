@@ -54,8 +54,7 @@ namespace WpfSampler.ViewModels
             Features = new ObservableCollection<Feature>(productCatalog.GetFeatures());
             Products = new ObservableCollection<Product>(productCatalog.GetProducts());
             SelectedProduct = Products[0];
-            DebugMode = false;
-            //DebugMode = CommandLine.Debug
+            DebugMode = CommandLine.DebugMode;
         }
 
         private void ShowFileBrowser(TextBox fileNameReciever)

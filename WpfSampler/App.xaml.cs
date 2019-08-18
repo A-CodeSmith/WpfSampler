@@ -19,9 +19,14 @@ namespace WpfSampler
             base.OnStartup(e);
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
-            //CommandLine.Parse(e.Args);
-            //if (CommandLine.Debug)
-            //    MessageBox.Show("Debug", "Attach!");
+            if (!CommandLine.Parse(e.Args))
+            {
+                Shutdown(1);
+                return;
+            }
+
+            if (CommandLine.DebugMode)
+                MessageBox.Show("Debug", "Attach!");
 
             var window = new MainWindow();
             window.Show();

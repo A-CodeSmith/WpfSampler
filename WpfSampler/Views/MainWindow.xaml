@@ -111,7 +111,7 @@
         </DockPanel>
 
         <!-- Log Output -->
-        <DockPanel x:Name="LogOutputPanel" Grid.Row="2" Grid.Column="0">
+        <DockPanel x:Name="LogOutputPanel" Grid.Row="2" Grid.Column="0" Visibility="{Binding DebugMode, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock x:Name="LogOutputLabel" DockPanel.Dock="Top" Style="{StaticResource ControlLabelStyle}" Text="Log Output:"/>
             <TextBox x:Name="LogOutputTextBox" MinHeight="100" Margin="0,0,0,20"/>
         </DockPanel>
