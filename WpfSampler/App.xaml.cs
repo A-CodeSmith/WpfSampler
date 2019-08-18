@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,6 +15,8 @@ namespace WpfSampler
     /// </summary>
     public partial class App : Application
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -21,12 +24,16 @@ namespace WpfSampler
 
             if (!CommandLine.Parse(e.Args))
             {
+                log.Fatal("Command line parsing failed. Shutting down.");
                 Shutdown(1);
                 return;
             }
 
             if (CommandLine.DebugMode)
+            {
+                log.Debug("DebugMode enabled.");
                 MessageBox.Show("Debug", "Attach!");
+            }
 
             var window = new MainWindow();
             window.Show();
@@ -34,12 +41,12 @@ namespace WpfSampler
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            //logger.Fatal("A fatal error has occurred, and this application must close.");
-            //var exception = e.ExceptionObject as Exception;
-            //if (exception != null)
-            //{
-            //    logger.Fatal(exception);
-            //}
+            log.Fatal("A fatal error has occurred, and this application must close.");
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                log.Fatal(exception);
+            }
         }
     }
 }

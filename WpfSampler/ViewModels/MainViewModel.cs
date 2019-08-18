@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using log4net;
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -10,6 +11,8 @@ namespace WpfSampler.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private bool _debugMode;
         private Product _selectedProduct;
 
@@ -38,7 +41,7 @@ namespace WpfSampler.ViewModels
 
         private void DoWork()
         {
-            MessageBox.Show("DoWork called.");
+            log.Debug("Performing work...");
         }
 
         private void InitializeCommands()
@@ -68,7 +71,7 @@ namespace WpfSampler.ViewModels
 
         private void ViewLog()
         {
-            MessageBox.Show("ViewLog called.");
+            log.Debug("Opening log file...");
         }
     }
 }

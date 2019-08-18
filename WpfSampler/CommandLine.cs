@@ -1,11 +1,15 @@
-﻿using Mono.Options;
+﻿using log4net;
+using Mono.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace WpfSampler
 {
     class CommandLine
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static bool DebugMode { get; private set; } = false;
 
         public static bool Parse(string[] args)
@@ -32,9 +36,12 @@ namespace WpfSampler
             }
             catch (OptionException e)
             {
-                Console.Write("WpfSampler: ");
-                Console.WriteLine(e.Message);
-                Console.WriteLine("Try `WpfSampler --help' for more information.");
+                var writer = new StringWriter();
+                writer.Write("WpfSampler: ");
+                writer.WriteLine(e.Message);
+                writer.WriteLine("Try `WpfSampler --help' for more information.");
+                log.Info(writer.ToString());
+
                 return false;
             }
 
@@ -49,13 +56,16 @@ namespace WpfSampler
 
         static void ShowHelp(OptionSet p)
         {
-            Console.WriteLine("Usage: WpfSampler [OPTIONS]+");
-            Console.WriteLine("A small GUI application showcasing a variety of Wpf techniques.");
-            Console.WriteLine("This app doesn't accomplish anything. It is meant for educational purposes only.");
-            Console.WriteLine();
-            Console.WriteLine("Options:");
-            p.WriteOptionDescriptions(Console.Out);
-            Console.WriteLine();
+            var writer = new StringWriter();
+            writer.WriteLine("Usage: WpfSampler [OPTIONS]+");
+            writer.WriteLine("A small GUI application showcasing a variety of Wpf techniques.");
+            writer.WriteLine("This app doesn't accomplish anything. It is meant for educational purposes only.");
+            writer.WriteLine();
+            writer.WriteLine("Options:");
+            p.WriteOptionDescriptions(writer);
+            writer.WriteLine();
+
+            log.Info(writer.ToString());
         }
 
     }
