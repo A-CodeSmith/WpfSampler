@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSampler.Views"
+        xmlns:controls="clr-namespace:WpfSampler.Views.Controls"
         xmlns:b="clr-namespace:WpfSampler.ViewModels.Behaviors"
         xmlns:mx="clr-namespace:WpfSampler.ViewModels.MarkupExtensions"
         xmlns:vm="clr-namespace:WpfSampler.ViewModels"
@@ -86,7 +87,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="ChooseFileTextBox" Grid.Column="0" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ChooseFileTextBox" Grid.Column="0" Margin="0,0,10,0" Text="{Binding SelectedFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button x:Name="BrowseButton" Grid.Column="1" HorizontalAlignment="Left" Content="Browse"
                             Command="{Binding BrowseCommand}" CommandParameter="{Binding ElementName=ChooseFileTextBox}"/>
                 </Grid>
@@ -111,11 +112,11 @@
         </DockPanel>
 
         <!-- Log Output -->
-        <DockPanel x:Name="LogOutputPanel" Grid.Row="2" Grid.Column="0" Visibility="{Binding DebugMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <TextBlock x:Name="LogOutputLabel" DockPanel.Dock="Top" Style="{StaticResource ControlLabelStyle}" Text="Log Output:"/>
-            <TextBox x:Name="LogOutputTextBox" MinHeight="100" Margin="0,0,0,20"/>
-        </DockPanel>
-        
+        <controls:TextViewerControl
+            x:Name="LogExcerptPanel" Grid.Row="2" Grid.Column="0"
+            Visibility="{Binding DebugMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Label="Log Output:" Text="{Binding LogExcerpt, Mode=OneWay}"/>
+
         <!-- Bottom Action Buttons -->
         <Grid x:Name="BottomActionButtons" Grid.Row="3" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -133,7 +134,7 @@
                         <Setter Property="Margin" Value="5,0,0,0" />
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Name="DoWorkButton" Content="Do Work" Command="{Binding DoWorkCommand}" b:AudioBehavior.DingOnClick="True"/>
+                <Button x:Name="DoWorkButton" Content="Place Order" Command="{Binding PlaceOrderCommand}" b:AudioBehavior.DingOnClick="True"/>
                 <Button x:Name="ExitButton" Content="Exit" Click="ExitButton_Click"/>
             </StackPanel>
         </Grid>

@@ -1,0 +1,15 @@
+﻿<local:CustomControl x:Class="WpfSampler.Views.Controls.TextViewerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfSampler.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="500">
+
+    <DockPanel x:Name="TextViewerPanel" DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:TextViewerControl}}">
+        <TextBlock x:Name="TextViewerLabel" DockPanel.Dock="Top" Style="{StaticResource ControlLabelStyle}" Text="{Binding Label}"/>
+        <TextBox x:Name="TextViewerTextBox" MinHeight="150" MaxHeight="150" Margin="0,0,0,20" VerticalScrollBarVisibility="Visible" Text="{Binding Text}"/>
+    </DockPanel>
+    
+</local:CustomControl>
