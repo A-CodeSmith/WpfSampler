@@ -5,9 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfSampler.Views.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="500">
+             d:DesignHeight="200" d:DesignWidth="500">
 
-    <DockPanel x:Name="TextViewerPanel" DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:TextViewerControl}}">
+    <d:DesignerProperties.DesignStyle>
+        <Style TargetType="local:CustomControl">
+            <Setter Property="Background" Value="White" />
+        </Style>
+    </d:DesignerProperties.DesignStyle>
+
+    <DockPanel x:Name="TextViewerPanel"
+               DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:TextViewerControl}}"
+               d:DataContext ="{d:DesignInstance {x:Type local:TextViewerControlMockVM}, IsDesignTimeCreatable=True}">
         <TextBlock x:Name="TextViewerLabel" DockPanel.Dock="Top" Style="{StaticResource ControlLabelStyle}" Text="{Binding Label}"/>
         <TextBox x:Name="TextViewerTextBox" MinHeight="150" MaxHeight="150" Margin="0,0,0,20" VerticalScrollBarVisibility="Visible" Text="{Binding Text}"/>
     </DockPanel>
